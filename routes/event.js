@@ -77,4 +77,8 @@ router.delete("/delete/:eventid", (req, res, next) => {
     .catch(error => res.json(error))
 });
 
+// add event to favourites
+
+// delete event from favourites
+
 module.exports = router;

@@ -75,6 +75,12 @@ app.use("/auth", auth);
 const event = require("./routes/event");
 app.use("/event", event);
 
+const search = require("./routes/search");
+app.use("/search", search);
+
+const day = require("./routes/day");
+app.use("/day", day)
+
 // ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes
 require("./error-handling")(app);
 

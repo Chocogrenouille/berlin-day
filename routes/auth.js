@@ -21,6 +21,7 @@ router.post("/signup", (req, res, next) => {
   
   User.findOne({ $or: [{username: username}, {email: email}] })
   .then(userFromDB => {
+    console.log("console 1")
     if (userFromDB !== null) {
       let error = "";
       if (userFromDB.username === username && userFromDB.email === email) {
@@ -35,7 +36,7 @@ router.post("/signup", (req, res, next) => {
       return res.status(400).json({message: `This ${error} already exists.`});
     } else {
       const salt = bcrypt.genSaltSync();
-      const hash = bcrypt.hashSync(passport, salt);
+      const hash = bcrypt.hashSync(password, salt);
 
       User.create({
         username: username,
