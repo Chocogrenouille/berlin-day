@@ -44,7 +44,8 @@ router.post("/signup", (req, res, next) => {
       })
       .then(createdUser => {
         console.log(createdUser);
-        res.status(200).json(createdUser)})
+        res.status(200).json(createdUser)
+      })
     }
   })
   .catch(error => res.json(error))

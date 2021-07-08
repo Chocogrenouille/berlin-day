@@ -4,7 +4,7 @@ const eventSchema = new Schema({
   title: String,
   description: String,
   category: {
-    type: String,
+    type: [String],
     enum: ["food", "drinks", "concert", "exhibition", "museum", "nature", "sport", "markets", "other"]
   },
   picture: {
@@ -18,8 +18,20 @@ const eventSchema = new Schema({
     city: String
   },
   time: {
-      startTime: String,
-      duration: Number,
+    startTime: String,
+    duration: Number,
+  },
+  specificDate: String,
+  frequency: {
+    weekday: {
+      type: [String],
+      enum: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+    },
+    period: {
+      type: String,
+      enum: ["weekly", "monthly"]
+    },
+    occurence: Number
   },
   createdBy: [{
     type: Schema.Types.ObjectId,
