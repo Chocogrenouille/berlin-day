@@ -53,8 +53,34 @@ router.post("/signup", (req, res, next) => {
 });
 
 // log in user
-router.get("/login", (req, res, next) => {
-  res.json("All good in here");
+router.post("/login", (req, res, next) => {
+  passport.authenticate("local", (err, user) => {
+    if (err) {
+      return res.status(400).json({ message: "Error while logging in" });
+    }
+    if (!user) {
+      return res.status(400).json({ message: "Wrong credentials" });
+    }
+    req.login(user, (err) => {
+      if (err) {
+        return res.status(500).json({ message: "Error while logging in" });
+      }
+      return res.status(200).json(user);
+    });
+  })(req, res);
+});
+
+// --------------------- ADD LATER : CHECK IF USER IS LOGGED IN ---------------------------------- //
+// router.get("/loggedin", (req, res) => {
+//   console.log("this is the user from the session: ", req.user);
+//   res.json(req.user);
+// });
+
+// logout
+router.delete("/logout", (req, res) => {
+  req.logout();
+  req.session.destroy();
+  res.status(200).json({ message: "Successful Logout" });
 });
 
 module.exports = router;

@@ -18,6 +18,22 @@ const path = require('path');
 app.use(express.static(path.join(__dirname, "/client/build")));
 
 // everything for the login
+const session = require('express-session');
+const MongoStore = require('connect-mongo');
+const DB_URL = process.env.MONGODB_URI || "mongodb://localhost/berlin-day";
+
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET,
+    cookie: { maxAge: 1000 * 60 * 60 * 24 },
+    saveUninitialized: false,
+    resave: true,
+    store: MongoStore.create({
+      mongoUrl: DB_URL
+    })
+  })
+)
+
 const User = require('./models/User');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
@@ -44,7 +60,7 @@ passport.serializeUser((user, done) => {
         passwordField: 'password'
       }, (email, password, done) => {
       // this logic will be executed when we log in
-      User.findOne({ contact: {email: email} })
+      User.findOne({ email: email })
         .then(userFromDB => {
           console.log(userFromDB)
           if (userFromDB === null) {
