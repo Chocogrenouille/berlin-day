@@ -1,24 +1,33 @@
-import React from 'react';
-import logo from './logo.svg';
+import * as React from 'react';
 import './App.css';
+import { Route } from 'react-router-dom';
+import Navbar from './components/Navbar';
+import Signup from "./components/Signup";
+import Login from "./components/Login";
+import Events from './components/Events';
+import Creator from './components/Creator';
 
-function App() {
+function App () {
+  
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Navbar />
+      <Route exact path="/signup" render={(props) => (
+            <Signup/>
+          )}
+      />
+      <Route exact path="/login" render={(props) => (
+            <Login/>
+          )}
+      />
+      <Route exact path="/events" render={(props) => (
+            <Events/>
+          )}
+      />
+      <Route exact path="/creator" render={(props) => (
+            <Creator/>
+          )}
+      />
     </div>
   );
 }
