@@ -1,7 +1,9 @@
 import React from 'react'
 import { useState } from 'react'
+import { signup } from '../services/auth';
 
-export default function Signup() {
+export default function Signup () {
+    const [message, setMessage] = useState("");
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -9,6 +11,22 @@ export default function Signup() {
 
     const handleSubmit = (input: React.FormEvent<HTMLFormElement>) => {
         input.preventDefault();
+        signup(username, password, email)
+        .then(response => {
+            if (response.message){
+                setMessage(response.message);
+                setUsername("");
+                setPassword("");
+                setEmail("");
+            } else {
+                // I don't really need this console log
+                console.log(response);
+                // set current User in Props
+                // props.setUser(response);
+                // redirect to Dashboard?
+                // props.history.push("/dashboard");
+            }
+        })
         
     }
 
