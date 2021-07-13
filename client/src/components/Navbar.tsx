@@ -9,6 +9,7 @@ export default function Navbar() {
             <Link to="/events">See everything</Link>
             <Link to="/login">Login</Link>
             <Link to="/signup">Signup</Link>
+            <Link to="/add">Add Event</Link>
         </div>
     )
 }

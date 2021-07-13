@@ -6,6 +6,7 @@ import Signup from "./components/Signup";
 import Login from "./components/Login";
 import Events from './components/Events';
 import Creator from './components/Creator';
+import Add from './components/Add';
 
 function App () {
   
@@ -26,6 +27,10 @@ function App () {
       />
       <Route exact path="/creator" render={(props) => (
             <Creator/>
+          )}
+      />
+      <Route exact path="/add" render={(props) => (
+            <Add/>
           )}
       />
     </div>

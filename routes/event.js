@@ -70,6 +70,12 @@ router.put("/edit/:eventid", (req,res,next) => {
     .catch(error => res.json(error))
 });
 
+// get all event
+router.get("/overview", (req, res, next) => {
+    Event.find()
+    .then(response => res.status(200).json(response))
+})
+
 // delete event
 router.delete("/delete/:eventid", (req, res, next) => {
     Event.findByIdAndDelete(req.params.eventid)
